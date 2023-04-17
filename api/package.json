@@ -5,8 +5,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/index.ts",
-    "dev": "yarn start",
+    "build": "yarn clean && tsc --build && yarn copyfiles",
+    "clean": "rimraf ../dist",
+    "start": "node ../dist/api/index.js",
+    "copyfiles": "copyfiles src/schema.graphql public/* ../dist/api",
+    "dev": "nodemon index.ts",
     "test": "jest src"
   },
   "dependencies": {
@@ -15,12 +18,14 @@
     "apollo-server-express": "^3.3.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+    "copyfiles": "^2.4.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "graphql": "^15.6.1",
     "jose": "^4.3.7",
     "nodemon": "^2.0.13",
     "prompt": "^1.2.0",
+    "rimraf": "^5.0.0",
     "ts-node": "^10.2.1"
   },
   "devDependencies": {
